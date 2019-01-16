@@ -21,7 +21,6 @@ namespace CallGraphVisualizer
             Dictionary<string, int> nodes = new Dictionary<string, int>();
             Dictionary<int, List<int>> connections = new Dictionary<int, List<int>>();
             var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
-            bool isNew = true;
             int index = 0;
             int currentChildIndex = -1;
             foreach (var line in lines)
@@ -31,21 +30,17 @@ namespace CallGraphVisualizer
                 if (lline.StartsWith("The ")) continue;
                 if (lline.StartsWith("[")) continue;
 
-                int storedIndex = -1;
-                bool result = nodes.TryGetValue(lline, out storedIndex);
-                if (!result)
+                if (!nodes.TryGetValue(lline, out int storedIndex))
                 {
                     nodes.Add(lline, index);
                     storedIndex = index;
-                }
-                List<int> currentNodeConnections = null;
-                connections.TryGetValue(storedIndex, out currentNodeConnections);
-                if (currentNodeConnections == null)
+                }                
+                if (!connections.TryGetValue(storedIndex, out List<int> currentNodeConnections))
                 {
                     currentNodeConnections = new List<int>();
                     connections.Add(storedIndex, currentNodeConnections);
                 }
-                isNew = lline.StartsWith("__");
+                var isNew = lline.StartsWith("__");
                 if (!currentNodeConnections.Contains(currentChildIndex) && currentChildIndex >= 0 && !isNew) currentNodeConnections.Add(currentChildIndex);
                 //if (isNew)
                 //    currentChildIndex = -1;
