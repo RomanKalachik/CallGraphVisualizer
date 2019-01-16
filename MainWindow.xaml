@@ -1,0 +1,62 @@
+﻿<Window
+    x:Class="CallGraphVisualizer.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:local="clr-namespace:CallGraphVisualizer"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d"
+    Title="MainWindow">
+
+    <Window.Resources>
+        <local:NameToColorConverter x:Key="colorConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <dxdiag:DiagramDesignerControl
+            x:Name="diagramControl"
+            ActiveTool="{x:Static dxdiag:DiagramController.PanTool}"
+            AllowZoom="True"
+            CanvasSizeMode="Fill"
+            IsReadOnly="True"
+            ShowPageBreaks="False"
+            ShowRulers="False"
+            TreeLayoutAlignment="Near"
+            TreeLayoutDirection="LeftToRight">
+            <dxmvvm:Interaction.Behaviors>
+                <dxdiag:DiagramDataBindingBehavior
+                    ConnectorFromMember="From"
+                    ConnectorsSource="{Binding Connections}"
+                    ConnectorToMember="To"
+                    ItemsSource="{Binding Items}"
+                    KeyMember="Id"
+                    LayoutKind="Tree">
+                    <dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
+                        <dxdiag:DiagramControl SelectedStencils="TemplateDesigner" ShowPageBreaks="false">
+                            <dxdiag:DiagramContainer
+                                Width="400"
+                                Height="40"
+                                ThemeStyleId="Variant1">
+                                <dxdiag:DiagramShape
+                                    Width="400"
+                                    Height="40"
+                                    Background="{Binding Name, Converter={StaticResource colorConverter}}"
+                                    StrokeThickness="0">
+                                    <dxdiag:DiagramShape.Bindings>
+                                        <dxdiag:DiagramBinding Expression="Name" PropertyName="Content" />
+                                        <!--<dxdiag:DiagramBinding Expression=""-->
+                                    </dxdiag:DiagramShape.Bindings>
+                                </dxdiag:DiagramShape>
+                            </dxdiag:DiagramContainer>
+                        </dxdiag:DiagramControl>
+                    </dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
+                </dxdiag:DiagramDataBindingBehavior>
+            </dxmvvm:Interaction.Behaviors>
+        </dxdiag:DiagramDesignerControl>
+    </Grid>
+
+</Window>
