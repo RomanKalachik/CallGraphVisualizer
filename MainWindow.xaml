@@ -5,28 +5,43 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-    xmlns:local="clr-namespace:CallGraphVisualizer"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="800"
     Height="450"
     mc:Ignorable="d"
     Title="MainWindow">
-
-    <!--<Window.Resources>
-        <local:NameToColorConverter x:Key="colorConverter" />
-    </Window.Resources>-->
-
+    <Window.Resources>
+        <Style x:Key="contentItemStyle" TargetType="dxdiag:DiagramContentItem">
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding}"/>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="ThemeStyleId" Value="Variant1"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{DXBinding Expr='@c.Name.Contains(`DevExpress.`)'}" Value="True">
+                    <Setter Property="ThemeStyleId" Value="Variant3"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <dxdiag:DiagramDesignerControl
             x:Name="diagramControl"
+            IsReadOnly="True"
+            Theme="Linear"
             ActiveTool="{x:Static dxdiag:DiagramController.PanTool}"
             AllowZoom="True"
+            SelectionMode="Single"
+            ToolboxVisibility="Closed"
             CanvasSizeMode="Fill"
-            IsReadOnly="True"
             ShowPageBreaks="False"
             ShowRulers="False"
-            TreeLayoutAlignment="Near"
-            >
+            LineJumpPlacement="None">
             <dxmvvm:Interaction.Behaviors>
                 <dxdiag:DiagramDataBindingBehavior
                     ConnectorFromMember="From"
@@ -34,28 +49,19 @@
                     ConnectorToMember="To"
                     ItemsSource="{Binding Items}"
                     KeyMember="Id"
-                    LayoutKind="Tree">
+                    LayoutKind="Sugiyama">
                     <dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
                         <dxdiag:DiagramControl SelectedStencils="TemplateDesigner" ShowPageBreaks="false">
-                            <dxdiag:DiagramContainer
-                                Width="400"
-                                Height="40"
-                                ThemeStyleId="Variant1">
-                                <dxdiag:DiagramShape
-                                    Width="400"
-                                    Height="40"
-                                    StrokeThickness="0">
-                                    <dxdiag:DiagramShape.Bindings>
-                                        <dxdiag:DiagramBinding Expression="Name" PropertyName="Content" />
-                                        <dxdiag:DiagramBinding Expression="Color" PropertyName="Background" />
-                                    </dxdiag:DiagramShape.Bindings>
-                                </dxdiag:DiagramShape>
-                            </dxdiag:DiagramContainer>
+                            <dxdiag:DiagramContentItem CustomStyleId="contentItemStyle" CanSelect="False">
+                                <dxdiag:DiagramContentItem.Bindings>
+                                    <dxdiag:DiagramBinding Expression="Name" PropertyName="Content" />
+                                </dxdiag:DiagramContentItem.Bindings>
+                            </dxdiag:DiagramContentItem>
+                            <dxdiag:DiagramConnector Type="OrgChart"/>
                         </dxdiag:DiagramControl>
                     </dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
                 </dxdiag:DiagramDataBindingBehavior>
             </dxmvvm:Interaction.Behaviors>
         </dxdiag:DiagramDesignerControl>
     </Grid>
-
 </Window>
