@@ -49,10 +49,14 @@ namespace CallGraphVisualizer
                 if (isNew)
                 {
                     var len = "___InvalidateMeasure".Length;
-                    string timeString = lline.Substring(len, lline.IndexOf(@"\n") - len);
-                    currentTime = int.Parse(timeString);
-                    if (!rangeInitialized) timings.Add(currentTime);
-                    lline = lline.Substring(lline.IndexOf(@"\n")+2);
+                    var endIndex = lline.IndexOf(@"\n");
+                    if (endIndex > 0 && len > 0)
+                    {
+                        string timeString = lline.Substring(len, endIndex - len);
+                        currentTime = int.Parse(timeString);
+                        if (!rangeInitialized) timings.Add(currentTime);
+                        lline = lline.Substring(lline.IndexOf(@"\n") + 2);
+                    }
                 }
                 if (rangeInitialized)
                 {
