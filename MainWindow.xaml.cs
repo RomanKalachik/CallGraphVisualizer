@@ -52,6 +52,7 @@ namespace CallGraphVisualizer
                     string timeString = lline.Substring(len, lline.IndexOf(@"\n") - len);
                     currentTime = int.Parse(timeString);
                     if (!rangeInitialized) timings.Add(currentTime);
+                    lline = lline.Substring(lline.IndexOf(@"\n")+2);
                 }
                 if (rangeInitialized)
                 {
@@ -93,7 +94,7 @@ namespace CallGraphVisualizer
                     viewModel.Connections.Add(new Link() { From = lindex, To = cindex });
                 }
             }
-            diagramControl.ApplyTreeLayout();
+            //diagramControl.ApplyTreeLayout();
             diagramControl.EndInit();
         }
     }
