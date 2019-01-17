@@ -50,17 +50,14 @@ namespace CallGraphVisualizer
             }
             var viewModel = new ViewModel();
             DataContext = viewModel;
-            SolidColorBrush dx = new SolidColorBrush(Colors.Blue);
-            SolidColorBrush ordinal = new SolidColorBrush(Colors.Black);
-            SolidColorBrush charts = new SolidColorBrush(Colors.DarkCyan);
-
-
             foreach (var node in nodes.Keys)
             {
                 var lindex = nodes[node];
                 var connectionList = connections[lindex];
-
-                viewModel.Items.Add(new Item() { Id = lindex, Name = node, Color = node.Contains("DevEx") ? node.Contains("Charts") ? charts : dx : ordinal });
+                var name = node.Replace("!", Environment.NewLine);
+                int pointIndex = name.LastIndexOf(".");
+                if (pointIndex > 0 && pointIndex < name.Length - 1) name = name.Substring(0, pointIndex) + Environment.NewLine + name.Substring(pointIndex + 1);
+                viewModel.Items.Add(new Item() { Id = lindex, Name = name });
                 foreach (var cindex in connectionList)
                 {
                     viewModel.Connections.Add(new Link() { From = lindex, To = cindex });
@@ -87,7 +84,6 @@ namespace CallGraphVisualizer
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public SolidColorBrush Color { get; set; }
     }
 
     public class Link
@@ -96,26 +92,4 @@ namespace CallGraphVisualizer
         public object To { get; set; }
         
     }
-
-    //public class NameToColorConverter : IValueConverter
-    //{
-    //    SolidColorBrush dx = new SolidColorBrush(Colors.LightBlue);
-    //    SolidColorBrush ordinal = new SolidColorBrush(Colors.LightGray);
-
-    //    public object Convert(object value, Type targetType,
-    //        object parameter, CultureInfo culture)
-    //    {
-    //        string name = (string)value;
-    //        if (name.StartsWith("DevEx"))
-    //            return dx;
-    //        else return ordinal;
-    //    }
-
-    //    public object ConvertBack(object value, Type targetType,
-    //        object parameter, CultureInfo culture)
-    //    {
-    //        return null;
-    //        // Do the conversion from visibility to bool
-    //    }
-    //}
 }

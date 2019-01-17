@@ -15,7 +15,7 @@
             <Setter Property="ContentTemplate">
                 <Setter.Value>
                     <DataTemplate>
-                        <TextBlock TextWrapping="WrapWithOverflow" Text="{Binding}"/>
+                        <TextBlock  TextAlignment="Center" TextWrapping="WrapWithOverflow" Margin="3" Text="{Binding}"/>
                     </DataTemplate>
                 </Setter.Value>
             </Setter>
@@ -25,6 +25,9 @@
             <Style.Triggers>
                 <DataTrigger Binding="{DXBinding Expr='@c.Name.Contains(`DevExpress.`)'}" Value="True">
                     <Setter Property="ThemeStyleId" Value="Variant3"/>
+                </DataTrigger>
+                <DataTrigger Binding="{DXBinding Expr='@c.Name.Contains(`Charts`)'}" Value="True">
+                    <Setter Property="ThemeStyleId" Value="Variant2"/>
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -49,7 +52,7 @@
                     ConnectorToMember="To"
                     ItemsSource="{Binding Items}"
                     KeyMember="Id"
-                    LayoutKind="Sugiyama">
+                    LayoutKind="Tree">
                     <dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
                         <dxdiag:DiagramControl SelectedStencils="TemplateDesigner" ShowPageBreaks="false">
                             <dxdiag:DiagramContentItem CustomStyleId="contentItemStyle" CanSelect="False">
