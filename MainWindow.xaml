@@ -26,7 +26,7 @@
             ShowPageBreaks="False"
             ShowRulers="False"
             TreeLayoutAlignment="Near"
-            TreeLayoutDirection="LeftToRight">
+            >
             <dxmvvm:Interaction.Behaviors>
                 <dxdiag:DiagramDataBindingBehavior
                     ConnectorFromMember="From"
