@@ -52,12 +52,15 @@ namespace CallGraphVisualizer
             DataContext = viewModel;
             SolidColorBrush dx = new SolidColorBrush(Colors.Blue);
             SolidColorBrush ordinal = new SolidColorBrush(Colors.Black);
+            SolidColorBrush charts = new SolidColorBrush(Colors.DarkCyan);
+
 
             foreach (var node in nodes.Keys)
             {
                 var lindex = nodes[node];
                 var connectionList = connections[lindex];
-                viewModel.Items.Add(new Item() { Id = lindex, Name = node, Color = node.Contains("DevEx") ? dx : ordinal });
+
+                viewModel.Items.Add(new Item() { Id = lindex, Name = node, Color = node.Contains("DevEx") ? node.Contains("Charts") ? charts : dx : ordinal });
                 foreach (var cindex in connectionList)
                 {
                     viewModel.Connections.Add(new Link() { From = lindex, To = cindex });
