@@ -5,6 +5,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:dxdiag="http://schemas.devexpress.com/winfx/2008/xaml/diagram"
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+           xmlns:Custom="http://schemas.devexpress.com/winfx/2008/xaml/charts/rangecontrolclient" 
+        xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors" 
+
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="800"
     Height="450"
@@ -33,7 +36,19 @@
         </Style>
     </Window.Resources>
     <Grid>
-        <dxdiag:DiagramDesignerControl
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <dxe:RangeControl  Margin="20,5"  ShowNavigationButtons="True" ShowRangeBar="True" x:Name="rangeControl">
+            <Custom:NumericChartRangeControlClient  ItemsSource="{Binding Timings}"
+                GridSpacing="1" GridAlignment="1">
+                <Custom:NumericChartRangeControlClient.View>
+                    <Custom:RangeControlClientBarView/>
+                </Custom:NumericChartRangeControlClient.View>
+            </Custom:NumericChartRangeControlClient>
+        </dxe:RangeControl>
+        <dxdiag:DiagramDesignerControl Grid.Row="1"
             x:Name="diagramControl"
             IsReadOnly="True"
             Theme="Linear"

@@ -46,6 +46,7 @@
     <Reference Include="DevExpress.Xpf.Docking.v19.1" />
     <Reference Include="DevExpress.Xpf.Controls.v19.1" />
     <Reference Include="DevExpress.Xpf.DemoBase.v19.1" />
+    <Reference Include="DevExpress.Xpf.Charts.v19.1" />
     <Reference Include="DevExpress.Xpf.Core.v19.1" />
     <Reference Include="DevExpress.Xpf.LayoutControl.v19.1" />
     <Reference Include="DevExpress.Xpf.Grid.v19.1" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -14,42 +15,71 @@ namespace CallGraphVisualizer
     /// </summary>
     public partial class MainWindow : Window
     {
+        bool rangeInitialized = false;
+        ObservableCollection<int> timings = new ObservableCollection<int>();
+        String[] lines;
+        ViewModel viewModel = new ViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
             var text = File.ReadAllText(@"callGraph.txt");
-            Dictionary<string, int> nodes = new Dictionary<string, int>();
-            Dictionary<int, List<int>> connections = new Dictionary<int, List<int>>();
-            var lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            lines = text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            DataContext = viewModel;
+            Update();
+            rangeControl.PreviewMouseUp+= (s, e) => {
+                Update();
+            };
+        }
+
+        private void Update()
+        {
             int index = 0;
             int currentChildIndex = -1;
+            int currentTime = 0;
+            Dictionary<string, int> nodes = new Dictionary<string, int>();
+            Dictionary<int, List<int>> connections = new Dictionary<int, List<int>>();
             foreach (var line in lines)
             {
                 var lline = line.Trim();
                 if (lline.Length < 5) continue;
                 if (lline.StartsWith("The ")) continue;
                 if (lline.StartsWith("[")) continue;
+                var isNew = lline.StartsWith("__");
+                if (isNew)
+                {
+                    var len = "___InvalidateMeasure".Length;
+                    string timeString = lline.Substring(len, lline.IndexOf(@"\n") - len);
+                    currentTime = int.Parse(timeString);
+                    if (!rangeInitialized) timings.Add(currentTime);
+                }
+                if (rangeInitialized)
+                {
+                    if (timings[(int)(double)rangeControl.VisibleRangeStart] > currentTime || timings[(int)(double)rangeControl.VisibleRangeEnd] < currentTime) continue;
+                }
 
                 if (!nodes.TryGetValue(lline, out int storedIndex))
                 {
                     nodes.Add(lline, index);
                     storedIndex = index;
-                }                
+                }
                 if (!connections.TryGetValue(storedIndex, out List<int> currentNodeConnections))
                 {
                     currentNodeConnections = new List<int>();
                     connections.Add(storedIndex, currentNodeConnections);
                 }
-                var isNew = lline.StartsWith("__");
                 if (!currentNodeConnections.Contains(currentChildIndex) && currentChildIndex >= 0 && !isNew) currentNodeConnections.Add(currentChildIndex);
-                //if (isNew)
-                //    currentChildIndex = -1;
-                //else
                 currentChildIndex = storedIndex;
                 index++;
             }
-            var viewModel = new ViewModel();
-            DataContext = viewModel;
+            if (!rangeInitialized)
+            {
+                viewModel.Timings = timings;
+                rangeInitialized = true;
+            }
+            diagramControl.BeginInit();
+            viewModel.Connections.Clear();
+            viewModel.Items.Clear();
             foreach (var node in nodes.Keys)
             {
                 var lindex = nodes[node];
@@ -63,21 +93,19 @@ namespace CallGraphVisualizer
                     viewModel.Connections.Add(new Link() { From = lindex, To = cindex });
                 }
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            diagramControl.ApplyMindMapTreeLayout();
+            diagramControl.ApplyTreeLayout();
+            diagramControl.EndInit();
         }
     }
     public class ViewModel
     {
-        public List<Item> Items { get; set; }
-        public List<Link> Connections { get; set; }
+        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<Link> Connections { get; set; }
+        public ObservableCollection<int> Timings { get; set; }
         public ViewModel()
         {
-            Items = new List<Item>();
-            Connections = new List<Link>();
+            Items = new ObservableCollection<Item>();
+            Connections = new ObservableCollection<Link>();
         }
     }
     public class Item
