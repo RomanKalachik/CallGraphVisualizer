@@ -12,9 +12,9 @@
     mc:Ignorable="d"
     Title="MainWindow">
 
-    <Window.Resources>
+    <!--<Window.Resources>
         <local:NameToColorConverter x:Key="colorConverter" />
-    </Window.Resources>
+    </Window.Resources>-->
 
     <Grid>
         <dxdiag:DiagramDesignerControl
@@ -44,11 +44,10 @@
                                 <dxdiag:DiagramShape
                                     Width="400"
                                     Height="40"
-                                    Background="{Binding Name, Converter={StaticResource colorConverter}}"
                                     StrokeThickness="0">
                                     <dxdiag:DiagramShape.Bindings>
                                         <dxdiag:DiagramBinding Expression="Name" PropertyName="Content" />
-                                        <!--<dxdiag:DiagramBinding Expression=""-->
+                                        <dxdiag:DiagramBinding Expression="Color" PropertyName="Background" />
                                     </dxdiag:DiagramShape.Bindings>
                                 </dxdiag:DiagramShape>
                             </dxdiag:DiagramContainer>

@@ -50,11 +50,14 @@ namespace CallGraphVisualizer
             }
             var viewModel = new ViewModel();
             DataContext = viewModel;
+            SolidColorBrush dx = new SolidColorBrush(Colors.Blue);
+            SolidColorBrush ordinal = new SolidColorBrush(Colors.Black);
+
             foreach (var node in nodes.Keys)
             {
                 var lindex = nodes[node];
                 var connectionList = connections[lindex];
-                viewModel.Items.Add(new Item() { Id = lindex, Name = node });
+                viewModel.Items.Add(new Item() { Id = lindex, Name = node, Color = node.Contains("DevEx") ? dx : ordinal });
                 foreach (var cindex in connectionList)
                 {
                     viewModel.Connections.Add(new Link() { From = lindex, To = cindex });
@@ -81,33 +84,35 @@ namespace CallGraphVisualizer
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public SolidColorBrush Color { get; set; }
     }
 
     public class Link
     {
         public object From { get; set; }
         public object To { get; set; }
+        
     }
 
-    public class NameToColorConverter : IValueConverter
-    {
-        SolidColorBrush dx = new SolidColorBrush(Colors.LightBlue);
-        SolidColorBrush ordinal = new SolidColorBrush(Colors.LightGray);
+    //public class NameToColorConverter : IValueConverter
+    //{
+    //    SolidColorBrush dx = new SolidColorBrush(Colors.LightBlue);
+    //    SolidColorBrush ordinal = new SolidColorBrush(Colors.LightGray);
 
-        public object Convert(object value, Type targetType,
-            object parameter, CultureInfo culture)
-        {
-            string name = (string)value;
-            if (name.StartsWith("DevEx"))
-                return dx;
-            else return ordinal;
-        }
+    //    public object Convert(object value, Type targetType,
+    //        object parameter, CultureInfo culture)
+    //    {
+    //        string name = (string)value;
+    //        if (name.StartsWith("DevEx"))
+    //            return dx;
+    //        else return ordinal;
+    //    }
 
-        public object ConvertBack(object value, Type targetType,
-            object parameter, CultureInfo culture)
-        {
-            return null;
-            // Do the conversion from visibility to bool
-        }
-    }
+    //    public object ConvertBack(object value, Type targetType,
+    //        object parameter, CultureInfo culture)
+    //    {
+    //        return null;
+    //        // Do the conversion from visibility to bool
+    //    }
+    //}
 }
