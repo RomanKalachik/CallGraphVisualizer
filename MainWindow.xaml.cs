@@ -83,6 +83,7 @@ namespace CallGraphVisualizer
                 rangeInitialized = true;
             }
             diagramControl.BeginInit();
+            behavior.BeginInit();
             viewModel.Connections.Clear();
             viewModel.Items.Clear();
             foreach (var node in nodes.Keys)
@@ -98,7 +99,7 @@ namespace CallGraphVisualizer
                     viewModel.Connections.Add(new Link() { From = lindex, To = cindex });
                 }
             }
-            //diagramControl.ApplyTreeLayout();
+            behavior.EndInit();
             diagramControl.EndInit();
         }
     }
