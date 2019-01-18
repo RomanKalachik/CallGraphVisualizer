@@ -17,6 +17,8 @@ namespace CallGraphVisualizer
     {
         bool rangeInitialized = false;
         ObservableCollection<int> timings = new ObservableCollection<int>();
+        ObservableCollection<int> timingCount = new ObservableCollection<int>();
+
         String[] lines;
         ViewModel viewModel = new ViewModel();
 
@@ -37,6 +39,8 @@ namespace CallGraphVisualizer
             int index = 0;
             int currentChildIndex = -1;
             int currentTime = 0;
+            int currentTimeCount = 0;
+
             Dictionary<string, int> nodes = new Dictionary<string, int>();
             Dictionary<int, List<int>> connections = new Dictionary<int, List<int>>();
             foreach (var line in lines)
@@ -46,6 +50,7 @@ namespace CallGraphVisualizer
                 if (lline.StartsWith("The ")) continue;
                 if (lline.StartsWith("[")) continue;
                 var isNew = lline.StartsWith("__");
+                currentTimeCount++;
                 if (isNew)
                 {
                     var len = "___InvalidateMeasure".Length;
@@ -54,7 +59,10 @@ namespace CallGraphVisualizer
                     {
                         string timeString = lline.Substring(len, endIndex - len);
                         currentTime = int.Parse(timeString);
-                        if (!rangeInitialized) timings.Add(currentTime);
+                        if (!rangeInitialized) { timings.Add(currentTime);
+                            timingCount.Add(currentTimeCount);
+                            currentTimeCount = 0;
+                        }
                         lline = lline.Substring(lline.IndexOf(@"\n") + 2);
                     }
                 }
@@ -79,7 +87,7 @@ namespace CallGraphVisualizer
             }
             if (!rangeInitialized)
             {
-                viewModel.Timings = timings;
+                viewModel.Timings = timingCount;
                 rangeInitialized = true;
             }
             diagramControl.BeginInit();
