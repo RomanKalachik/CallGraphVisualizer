@@ -68,7 +68,10 @@ namespace CallGraphVisualizer
                 }
                 if (rangeInitialized)
                 {
-                    if (timings[(int)(double)rangeControl.VisibleRangeStart] > currentTime || timings[(int)(double)rangeControl.VisibleRangeEnd] < currentTime) continue;
+                    int start = (int)(double)rangeControl.SelectionRangeStart;
+                    int end = (int)(double)rangeControl.SelectionRangeEnd;
+                    if (timings[start]  > currentTime || 
+                        timings[end]    < currentTime) continue;
                 }
 
                 if (!nodes.TryGetValue(lline, out int storedIndex))

@@ -65,7 +65,6 @@
             ActiveTool="{x:Static dxdiag:DiagramController.PanTool}"
             AllowZoom="True"
             CanvasSizeMode="Fill"
-            IsReadOnly="True"
             LineJumpPlacement="None"
             SelectionMode="Single"
             ShowPageBreaks="False"
