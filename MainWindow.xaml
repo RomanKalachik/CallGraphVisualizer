@@ -61,7 +61,8 @@
             ShowRulers="False"
             LineJumpPlacement="None">
             <dxmvvm:Interaction.Behaviors>
-                <dxdiag:DiagramDataBindingBehavior
+                <dxdiag:DiagramDataBindingBehavior 
+                    x:Name="behavior"
                     ConnectorFromMember="From"
                     ConnectorsSource="{Binding Connections}"
                     ConnectorToMember="To"
