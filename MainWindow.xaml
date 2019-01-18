@@ -21,7 +21,7 @@
                     <DataTemplate>
                         <TextBlock
                             Margin="3"
-                            Text="{Binding}"
+                            Text="{Binding}" Foreground="Black" Background="White"
                             TextAlignment="Center"
                             TextWrapping="WrapWithOverflow" />
                     </DataTemplate>
@@ -61,7 +61,7 @@
         </dxe:RangeControl>
         <dxdiag:DiagramDesignerControl
             x:Name="diagramControl"
-            Grid.Row="1"
+            Grid.Row="1" ShowGrid="False"
             ActiveTool="{x:Static dxdiag:DiagramController.PanTool}"
             AllowZoom="True"
             CanvasSizeMode="Fill"
