@@ -64,7 +64,7 @@
         </dxe:RangeControl>
         <dxdiag:DiagramDesignerControl
             x:Name="diagramControl"
-            Grid.Row="1" ShowGrid="False"
+            Grid.Row="1" ShowGrid="False" ConnectorsSeparationMode="AllLines"
             ActiveTool="{x:Static dxdiag:DiagramController.PanTool}"
             AllowZoom="True"
             CanvasSizeMode="Fill"
@@ -90,7 +90,7 @@
                                     <dxdiag:DiagramBinding Expression="Name" PropertyName="Content" />
                                 </dxdiag:DiagramContentItem.Bindings>
                             </dxdiag:DiagramContentItem>
-                            <dxdiag:DiagramConnector Type="OrgChart" />
+                            <dxdiag:DiagramConnector Type="RightAngle" />
                         </dxdiag:DiagramControl>
                     </dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
                 </dxdiag:DiagramDataBindingBehavior>
