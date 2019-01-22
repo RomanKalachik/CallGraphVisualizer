@@ -21,7 +21,7 @@
                     <DataTemplate>
                         <TextBlock
                             Margin="3"
-                            Text="{Binding}" Foreground="Black" Background="White"
+                            Text="{Binding}" Foreground="Black" 
                             TextAlignment="Center"
                             TextWrapping="WrapWithOverflow" />
                     </DataTemplate>
@@ -37,6 +37,9 @@
                 <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`Charts`)'}">
                     <Setter Property="ThemeStyleId" Value="Variant2" />
                 </DataTrigger>
+                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`ChartControl`)'}">
+                    <Setter Property="ThemeStyleId" Value="Variant4" />
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
@@ -47,7 +50,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <dxe:RangeControl
-            x:Name="rangeControl"
+            x:Name="rangeControl" AllowImmediateRangeUpdate="True"
             Margin="20,5" Height="100"
             ShowNavigationButtons="False">
             <Custom:NumericChartRangeControlClient
