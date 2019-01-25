@@ -10,7 +10,7 @@
     xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="800"
-    Height="450" dx:ThemeManager.ThemeName="Office2019White"
+    Height="450" dx:ThemeManager.ThemeName="Office2013DarkGray"
     mc:Ignorable="d"
     Title="MainWindow">
 
@@ -90,7 +90,7 @@
                                     <dxdiag:DiagramBinding Expression="Name" PropertyName="Content" />
                                 </dxdiag:DiagramContentItem.Bindings>
                             </dxdiag:DiagramContentItem>
-                            <dxdiag:DiagramConnector Type="RightAngle" />
+                            <dxdiag:DiagramConnector Type="OrgChart" />
                         </dxdiag:DiagramControl>
                     </dxdiag:DiagramDataBindingBehavior.TemplateDiagram>
                 </dxdiag:DiagramDataBindingBehavior>
