@@ -1,4 +1,5 @@
-﻿using System;
+﻿///___InvalidateMeasue{System.Environment.TickCount}\n {element}-{element.GetHashCode()}-$CALLSTACK
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;

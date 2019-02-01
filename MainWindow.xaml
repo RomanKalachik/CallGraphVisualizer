@@ -40,6 +40,9 @@
                 <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`ChartControl`)'}">
                     <Setter Property="ThemeStyleId" Value="Variant4" />
                 </DataTrigger>
+                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`-WindowsBase`)'}">
+                    <Setter Property="ThemeStyleId" Value="Variant5" />
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </Window.Resources>
