@@ -35,29 +35,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Diagram.v19.1.Core">
+    <Reference Include="DevExpress.Diagram.v19.2.Core">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bin\Framework4\DevExpress.Diagram.v19.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Bin\Framework4\DevExpress.Diagram.v19.2.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v19.1" />
-    <Reference Include="DevExpress.DemoData.v19.1.Core" />
-    <Reference Include="DevExpress.DemoData.v19.1" />
-    <Reference Include="DevExpress.Xpf.Layout.v19.1.Core" />
-    <Reference Include="DevExpress.Xpf.Docking.v19.1" />
-    <Reference Include="DevExpress.Xpf.Controls.v19.1" />
-    <Reference Include="DevExpress.Xpf.DemoBase.v19.1" />
-    <Reference Include="DevExpress.Xpf.Charts.v19.1" />
-    <Reference Include="DevExpress.Xpf.Core.v19.1" />
-    <Reference Include="DevExpress.Xpf.LayoutControl.v19.1" />
-    <Reference Include="DevExpress.Xpf.Grid.v19.1" />
-    <Reference Include="DevExpress.Xpf.Grid.v19.1.Core" />
-    <Reference Include="DevExpress.Xpf.Ribbon.v19.1" />
-    <Reference Include="DevExpress.Mvvm.v19.1" />
-    <Reference Include="DevExpress.Xpf.Diagram.v19.1">
+    <Reference Include="DevExpress.Data.v19.2" />
+    <Reference Include="DevExpress.DemoData.v19.2.Core" />
+    <Reference Include="DevExpress.DemoData.v19.2" />
+    <Reference Include="DevExpress.Xpf.Layout.v19.2.Core" />
+    <Reference Include="DevExpress.Xpf.Docking.v19.2" />
+    <Reference Include="DevExpress.Xpf.Controls.v19.2" />
+    <Reference Include="DevExpress.Xpf.DemoBase.v19.2" />
+    <Reference Include="DevExpress.Xpf.Charts.v19.2" />
+    <Reference Include="DevExpress.Xpf.Core.v19.2" />
+    <Reference Include="DevExpress.Xpf.LayoutControl.v19.2" />
+    <Reference Include="DevExpress.Xpf.Grid.v19.2" />
+    <Reference Include="DevExpress.Xpf.Grid.v19.2.Core" />
+    <Reference Include="DevExpress.Xpf.Ribbon.v19.2" />
+    <Reference Include="DevExpress.Mvvm.v19.2" />
+    <Reference Include="DevExpress.Xpf.Diagram.v19.2">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Bin\Framework4\DevExpress.Xpf.Diagram.v19.1.dll</HintPath>
+      <HintPath>..\..\..\Bin\Framework4\DevExpress.Xpf.Diagram.v19.2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Printing.v19.1.Core" />
+    <Reference Include="DevExpress.Printing.v19.2.Core" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
