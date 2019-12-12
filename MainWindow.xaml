@@ -29,19 +29,19 @@
             </Setter>
             <Setter Property="MinHeight" Value="25" />
             <Setter Property="VerticalContentAlignment" Value="Center" />
-            <Setter Property="ThemeStyleId" Value="Variant1" />
+            <Setter Property="ThemeStyleId" Value="Variant5" />
             <Style.Triggers>
                 <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`DevExpress.`)'}">
-                    <Setter Property="ThemeStyleId" Value="Variant3" />
+                    <Setter Property="ThemeStyleId" Value="Variant5" />
                 </DataTrigger>
-                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`Charts`)'}">
+                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`RefinedSeries`)'}">
                     <Setter Property="ThemeStyleId" Value="Variant2" />
                 </DataTrigger>
-                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`ChartControl`)'}">
+                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`LightSeries`)'}">
                     <Setter Property="ThemeStyleId" Value="Variant4" />
                 </DataTrigger>
-                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`-WindowsBase`)'}">
-                    <Setter Property="ThemeStyleId" Value="Variant5" />
+                <DataTrigger Value="True" Binding="{DXBinding Expr='@c.Name.Contains(`RefinedPoint`)'}">
+                    <Setter Property="ThemeStyleId" Value="Variant3" />
                 </DataTrigger>
             </Style.Triggers>
         </Style>
@@ -58,7 +58,7 @@
             ShowNavigationButtons="False">
             <Custom:NumericChartRangeControlClient
                 GridAlignment="1"
-                GridSpacing="30"
+                GridSpacing="5"
                 ItemsSource="{Binding Timings}">
                 <Custom:NumericChartRangeControlClient.View>
                     <Custom:RangeControlClientBarView />

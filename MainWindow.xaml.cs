@@ -66,6 +66,7 @@ namespace CallGraphVisualizer
                 {
                     var len = "___InvalidateMeasure".Length;
                     var endIndex = lline.IndexOf(@"\n");
+                    if(endIndex <0) endIndex = lline.IndexOf(" ");
                     if (endIndex > 0 && len > 0)
                     {
                         string timeString = lline.Substring(len, endIndex - len);
@@ -76,7 +77,7 @@ namespace CallGraphVisualizer
                             timingCount.Add(eventsCountAtCurrentTime);
                             eventsCountAtCurrentTime = 0;
                         }
-                        lline = lline.Substring(lline.IndexOf(@"\n") + 3);
+                        lline = lline.Substring(endIndex+1);
                     }
                 }
                 if (rangeInitialized)
